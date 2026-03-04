@@ -1,0 +1,158 @@
+/* =============================================
+   dog-tracker.css — Jake's Countdown Dog
+   The dog emoji slides from left → right
+   as the countdown approaches April 11, 2026
+   ============================================= */
+
+/* --- Track bar (the runway the dog runs along) --- */
+#dog-track-container {
+  position: fixed;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  pointer-events: none;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+#dog-track-bar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  margin-bottom: 10px;
+}
+
+#dog-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f9a825, #ef5350);
+  border-radius: 3px;
+  transition: width 1s linear;
+}
+
+/* --- The dog emoji runner --- */
+#dog-runner {
+  position: absolute;
+  top: -28px;          /* sits just above the bar */
+  left: 0%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  line-height: 1;
+  transition: left 1s linear;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  animation: dog-bounce 0.4s ease-in-out infinite alternate;
+  cursor: default;
+}
+
+@keyframes dog-bounce {
+  from { transform: translateX(-50%) translateY(0px)   rotate(-5deg); }
+  to   { transform: translateX(-50%) translateY(-5px)  rotate(5deg);  }
+}
+
+/* When very close to the end, dog gets excited */
+#dog-runner.dog-excited {
+  animation: dog-excited 0.2s ease-in-out infinite alternate;
+  font-size: 2.6rem;
+}
+
+@keyframes dog-excited {
+  from { transform: translateX(-50%) translateY(0px)  rotate(-10deg) scale(1.0); }
+  to   { transform: translateX(-50%) translateY(-8px) rotate(10deg)  scale(1.1); }
+}
+
+/* --- Jake's photo on the right --- */
+#jake-target {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+#jake-target img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 3px solid #f9a825;
+  box-shadow: 0 0 0 3px rgba(249,168,37,0.3), 0 4px 16px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#jake-target span {
+  font-family: 'Georgia', serif;
+  font-size: 0.75rem;
+  color: #f9a825;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+}
+
+/* Jake pulses when dog is nearly there */
+#jake-target.jake-ready img {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 4px #f9a825, 0 0 24px rgba(249,168,37,0.6), 0 4px 16px rgba(0,0,0,0.5);
+  animation: jake-pulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes jake-pulse {
+  from { box-shadow: 0 0 0 3px #f9a825, 0 0 16px rgba(249,168,37,0.4); }
+  to   { box-shadow: 0 0 0 6px #f9a825, 0 0 32px rgba(249,168,37,0.8); }
+}
+
+/* --- Dog start label on left --- */
+#dog-start-label {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+#dog-start-label span {
+  font-family: 'Georgia', serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+}
+
+/* --- Arrival celebration --- */
+#dog-arrived-msg {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  font-size: 3rem;
+  color: #f9a825;
+  text-shadow: 0 0 30px rgba(249,168,37,0.8), 0 2px 8px rgba(0,0,0,0.9);
+  animation: celebration 0.6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes celebration {
+  from { transform: translate(-50%, -50%) scale(1.0); }
+  to   { transform: translate(-50%, -50%) scale(1.1); }
+}
