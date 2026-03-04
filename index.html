@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jake's Countdown</title>
+		<link rel="icon" type="image/png" href="favicon/favicon.ico">
+    <style>
+        /* CSS: Styling the look and layout */
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+						min-height: 100vh;
+            margin: 0;
+						box-sizing: border-box;
+        }
+
+        h1 {
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+						text-align: center;
+        }
+
+        /* 1. Increase max-width to fit 4 blocks + gaps comfortably */
+        #countdown {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 800px; /* Increased from 600px */
+        }
+
+        /* 2. Adjust flex-basis so they don't wrap prematurely */
+        .time-block {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 12px;
+            flex: 1 1 150px; /* Increased basis to 150px */
+            max-width: 180px; /* Allow them to be slightly wider */
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+
+        .time-block span {
+            display: block;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Message shown when the countdown finishes */
+        #message {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ff4757;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Jake's countdown</h1>
+
+    <div id="countdown">
+        <div class="time-block">
+            <span id="days">00</span>
+            <div class="label">Days</div>
+        </div>
+        <div class="time-block">
+            <span id="hours">00</span>
+            <div class="label">Hours</div>
+        </div>
+        <div class="time-block">
+            <span id="minutes">00</span>
+            <div class="label">Minutes</div>
+        </div>
+        <div class="time-block">
+            <span id="seconds">00</span>
+            <div class="label">Seconds</div>
+        </div>
+    </div>
+
+    <!-- YaY -->
+		<div id="message"><img src="dog.jpeg"></div>
+
+    <script>
+        const targetDate = new Date("April 11, 2026 12:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculations for days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the results to the HTML elements
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+            // If the countdown is over
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("message").style.display = "block";
+            }
+        }
+
+        // Run the function every 1 second
+        const interval = setInterval(updateCountdown, 1000);
+
+        // Run once immediately so there's no 1-second delay on load
+        updateCountdown();
+    </script>
+
+</body>
+</html>
+
