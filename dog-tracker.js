@@ -1,20 +1,20 @@
 /* =============================================
    dog-tracker.js — Jake's Countdown Dog
    Reads the existing countdown timer and
-   slides the dog emoji from left → right
+   slides the dog emoji from left -> right
    toward Jake's photo as time runs out.
    ============================================= */
 
 (function () {
   'use strict';
 
-  // ── Configuration ──────────────────────────────────────────────
+  // -- Configuration ------------------------------------------------
   const TARGET_DATE   = new Date('April 11, 2026 12:00:00').getTime();
   const JAKE_IMG_SRC  = 'jake.jpeg';   // path relative to the HTML file
   const EXCITED_PCT   = 90;            // % progress where dog gets excited
   const READY_PCT     = 85;            // % progress where Jake starts glowing
 
-  // ── Inject HTML elements ────────────────────────────────────────
+  // -- Inject HTML elements -----------------------------------------
   function buildUI() {
     // Left "start" label
     const startLabel = document.createElement('div');
@@ -49,7 +49,7 @@
     document.body.appendChild(msg);
   }
 
-  // ── Calculate progress (0–100) ──────────────────────────────────
+  // -- Calculate progress (0–100) ----------------------------------------
   // We need a START date to anchor the left side.
   // We derive it from the page's own countdown if possible,
   // otherwise fall back to a fixed start date.
@@ -84,7 +84,7 @@
     return pct;
   }
 
-  // ── Map progress → left% position on track ──────────────────────
+  // -- Map progress -> left% position on track ----------------------------
   // The track spans from ~5% (near left edge, room for dog emoji)
   // to ~88% (near right edge, just before Jake's photo)
   function progressToLeft(pct) {
@@ -93,7 +93,7 @@
     return MIN_LEFT + (pct / 100) * (MAX_LEFT - MIN_LEFT);
   }
 
-  // ── Update the UI every second ───────────────────────────────────
+  // -- Update the UI every second ------------------------------------------
   function tick() {
     const pct    = getProgress();
     const leftPc = progressToLeft(pct);
@@ -129,7 +129,7 @@
     }
   }
 
-  // ── Boot ─────────────────────────────────────────────────────────
+  // -- Boot ------------------------------------------------------------
   function init() {
     buildUI();
     tick();                           // immediate first draw

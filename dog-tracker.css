@@ -1,6 +1,6 @@
 /* =============================================
    dog-tracker.css — Jake's Countdown Dog
-   The dog emoji slides from left → right
+   The dog emoji slides from left -> right
    as the countdown approaches April 11, 2026
    ============================================= */
 
@@ -50,6 +50,7 @@
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
   animation: dog-bounce 0.4s ease-in-out infinite alternate;
   cursor: default;
+  /* transform: scale(-1); */
 }
 
 @keyframes dog-bounce {
