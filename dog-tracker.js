@@ -45,7 +45,7 @@
     // Arrival message (hidden until done)
     const msg = document.createElement('div');
     msg.id = 'dog-arrived-msg';
-    msg.textContent = '🐕 Jake is here! 🎉';
+    msg.textContent = '🐕 Ruby is here! 🎉';
     document.body.appendChild(msg);
   }
 
