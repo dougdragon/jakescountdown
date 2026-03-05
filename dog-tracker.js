@@ -89,7 +89,7 @@
   // to ~88% (near right edge, just before Jake's photo)
   function progressToLeft(pct) {
     const MIN_LEFT = 4;   // % — leftmost position
-    const MAX_LEFT = 87;  // % — rightmost position (just before Jake)
+    const MAX_LEFT = 96;  // % — rightmost position (just before Jake)
     return MIN_LEFT + (pct / 100) * (MAX_LEFT - MIN_LEFT);
   }
 
